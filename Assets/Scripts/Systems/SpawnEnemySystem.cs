@@ -14,6 +14,7 @@ namespace Systems
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<BeginInitializationEntityCommandBufferSystem.Singleton>();
+            state.RequireForUpdate<EnemySpawnTimer>();
         }
         [BurstCompile]
         public void OnUpdate(ref SystemState state)

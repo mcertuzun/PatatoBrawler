@@ -22,9 +22,9 @@ namespace AuthoringAndMono
     {
         public override void Bake(SpawnerMono authoring)
         {
-            var graveyardEntity = GetEntity(TransformUsageFlags.Dynamic);
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(graveyardEntity, new SpawnerProperties
+            AddComponent(entity, new SpawnerProperties
             {
                 FieldDimensions = authoring.FieldDimensions,
                 NumberOfSpawners = authoring.NumberOfSpawners,
@@ -33,12 +33,12 @@ namespace AuthoringAndMono
                 EnemySpawnRate = authoring.EnemySpawnRate,
                 offset = authoring.EnemyOffset,
             });
-            AddComponent(graveyardEntity, new SpawnerRandom
+            AddComponent(entity, new SpawnerRandom
             {
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });
-            AddComponent<SpawnerLocations>(graveyardEntity);
-            AddComponent<EnemySpawnTimer>(graveyardEntity);
+            AddComponent<SpawnerLocations>(entity);
+            AddComponent<EnemySpawnTimer>(entity);
         }
     }
 }
