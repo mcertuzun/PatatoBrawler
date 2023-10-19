@@ -155,11 +155,14 @@ MonoBehaviour:
   FieldDimensions:
     x: 40
     y: 40
-  NumberTombstonesToSpawn: 100
-  TombstonePrefab: {fileID: 4584779205005183757, guid: 4124a30e7c3981e48b57742f6d81e18a,
+  NumberOfSpawners: 50
+  SpawnerPrefab: {fileID: 4584779205005183757, guid: 4124a30e7c3981e48b57742f6d81e18a,
     type: 3}
+  EnemyPrefab: {fileID: 5303650863306214550, guid: 96c7e1d5eb8f9594ea57be3df187f580,
+    type: 3}
+  EnemySpawnRate: 1
   RandomSeed: 101
-  TombstoneOffset:
+  EnemyOffset:
     x: 0
     y: -2
     z: 1

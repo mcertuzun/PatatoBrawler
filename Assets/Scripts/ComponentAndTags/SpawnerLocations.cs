@@ -4,12 +4,12 @@ using Unity.Mathematics;
 
 namespace ComponentAndTags
 {
-    public struct ZombieSpawnPoints : IComponentData
+    public struct SpawnerLocations : IComponentData
     {
-        public BlobAssetReference<ZombieSpawnPointsBlob> Value;
+        public BlobAssetReference<EnemySpawnPointsBlob> Value;
     }
 
-    public struct ZombieSpawnPointsBlob
+    public struct EnemySpawnPointsBlob
     {
         public BlobArray<float3> Value;
     }
