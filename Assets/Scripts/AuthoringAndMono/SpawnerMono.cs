@@ -31,14 +31,14 @@ namespace AuthoringAndMono
                 SpawnerPrefab = GetEntity(authoring.SpawnerPrefab, TransformUsageFlags.Dynamic),
                 EnemyPrefab = GetEntity(authoring.EnemyPrefab, TransformUsageFlags.Dynamic),
                 EnemySpawnRate = authoring.EnemySpawnRate,
-                offset = authoring.EnemyOffset,
+                offset = authoring.EnemyOffset
             });
             AddComponent(entity, new SpawnerRandom
             {
                 Value = Random.CreateFromIndex(authoring.RandomSeed)
             });
             AddComponent<SpawnerLocations>(entity);
-            AddComponent<EnemySpawnTimer>(entity);
+            AddComponent<Timer>(entity);
         }
     }
 }

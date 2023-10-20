@@ -1,4 +1,3 @@
-
 using Unity.Entities;
 using Unity.Mathematics;
 
@@ -12,10 +11,5 @@ namespace ComponentAndTags
         public Entity EnemyPrefab;
         public float EnemySpawnRate;
         public float3 offset;
-    }
-
-    public struct EnemySpawnTimer : IComponentData
-    {
-        public float Value;
     }
 }

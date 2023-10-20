@@ -1,8 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using Aspects;
-using ComponentAndTags;
-using Unity.Burst;
+﻿using Unity.Burst;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Systems
 {
@@ -26,22 +24,6 @@ namespace Systems
                 DeltaTime = deltaTime,
                 ECB = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged).AsParallelWriter()
             }.ScheduleParallel();
-        }
-    }
-
-    [BurstCompile]
-    public partial struct EnemyRiseJob : IJobEntity
-    {
-        public float DeltaTime;
-        public EntityCommandBuffer.ParallelWriter ECB;
-
-        [BurstCompile]
-        private void Execute(EnemyRiseAspect enemy, [ChunkIndexInQuery]int sortKey)
-        {
-            enemy.Rise(DeltaTime);
-            if(!enemy.IsAboveGround)return;
-            enemy.SetAtGroundLevel();
-            ECB.RemoveComponent<EnemyRiseRate>(sortKey, enemy.Entity);
         }
     }
 }

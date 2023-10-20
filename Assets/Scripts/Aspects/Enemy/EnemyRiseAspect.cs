@@ -17,7 +17,10 @@ namespace Aspects
         }
 
         public bool IsAboveGround => _transform.ValueRO.Position.y >= 1f;
-        public void SetAtGroundLevel()=> _transform.ValueRW.Position.y = 1f;
+
+        public void SetAtGroundLevel()
+        {
+            _transform.ValueRW.Position.y = 1f;
+        }
     }
-    
 }

@@ -121,3 +121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RiseRate: 1
+  moveSpeed: 1
+  moveAmplitude: 0.2
+  moveFrequency: 0.5

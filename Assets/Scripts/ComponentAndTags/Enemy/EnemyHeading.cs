@@ -2,7 +2,7 @@
 
 namespace ComponentAndTags
 {
-    public struct EnemyRiseRate: IComponentData
+    public struct EnemyHeading : IComponentData
     {
         public float Value;
     }
