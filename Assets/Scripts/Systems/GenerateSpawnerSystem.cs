@@ -23,7 +23,7 @@ namespace Systems
             var spawnerEntity = SystemAPI.GetSingletonEntity<SpawnerProperties>();
             var spawner = SystemAPI.GetAspect<SpawnerAspect>(spawnerEntity);
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-
+            ecb.Instantiate(spawner.PlayerPrefab);
             var builder = new BlobBuilder(Allocator.Temp);
             ref var spawnPoints = ref builder.ConstructRoot<EnemySpawnPointsBlob>();
             var arrayBuilder = builder.Allocate(ref spawnPoints.Value, spawner.NumberOfSpawners);

@@ -9,6 +9,7 @@ namespace ComponentAndTags
         public int NumberOfSpawners;
         public Entity SpawnerPrefab;
         public Entity EnemyPrefab;
+        public Entity PlayerPrefab;
         public float EnemySpawnRate;
         public float3 offset;
     }

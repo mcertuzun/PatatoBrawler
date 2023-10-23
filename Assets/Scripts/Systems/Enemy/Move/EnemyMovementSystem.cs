@@ -16,7 +16,7 @@ namespace Systems.Move
         public void OnUpdate(ref SystemState state)
         {
             var deltaTime = SystemAPI.Time.DeltaTime;
-            new MoveJob()
+            new EnemyMoveJob()
             {
                 DeltaTime = deltaTime
             }.ScheduleParallel();

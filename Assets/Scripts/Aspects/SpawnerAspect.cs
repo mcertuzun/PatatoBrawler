@@ -1,6 +1,5 @@
 ﻿using ComponentAndTags;
 using Helpers;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -10,15 +9,16 @@ namespace Aspects
     public readonly partial struct SpawnerAspect : IAspect
     {
         public readonly Entity Entity;
-        private readonly RefRW<LocalTransform> _transform;
+        private readonly RefRO<LocalTransform> _transform;
+        private LocalTransform Transform => _transform.ValueRO;
+
         private readonly RefRO<SpawnerProperties> _spawnPointProperties;
         private readonly RefRW<SpawnerRandom> _spawnPointRandom;
         private readonly RefRW<SpawnerLocations> _spawnPointLocations;
         private readonly RefRW<Timer> _enemySpawnTimer;
         public int NumberOfSpawners => _spawnPointProperties.ValueRO.NumberOfSpawners;
         public Entity SpawnerPrefab => _spawnPointProperties.ValueRO.SpawnerPrefab;
-        private LocalTransform Transform => _transform.ValueRO;
-
+        public Entity PlayerPrefab => _spawnPointProperties.ValueRO.PlayerPrefab;
 
         private int EnemySpawnPointCount => _spawnPointLocations.ValueRO.Value.Value.Value.Length;
 
@@ -26,13 +26,25 @@ namespace Aspects
         {
             return new LocalTransform()
             {
-                Position = GetRandomPosition(),
-                Rotation = GetRandomRotation(),
-                Scale = GetRandomScale(0.5f)
+                Position = GetRandomSpawnerPosition(),
+                Rotation = GetRandomSpawnerRotation(),
+                Scale = GetRandomSpawnerScale(0.5f)
             };
         }
+        private float3 GetRandomSpawnerPosition()
+        {
+            float3 randomPosition;
+            do
+            {
+                randomPosition = _spawnPointRandom.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
+            } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PLAYER_SAFETY_RADIUS - 1);
 
+            return randomPosition;
+        }
+        private quaternion GetRandomSpawnerRotation() => quaternion.RotateY(_spawnPointRandom.ValueRW.Value.NextFloat(-0.25f, 0.25f));
+        private float GetRandomSpawnerScale(float min) => _spawnPointRandom.ValueRW.Value.NextFloat(min, 1f);
         private float3 MinCorner => Transform.Position - HalfDimensions;
+
         private float3 MaxCorner => Transform.Position + HalfDimensions;
 
         private float3 HalfDimensions => new()
@@ -44,26 +56,6 @@ namespace Aspects
 
         public float3 Position => Transform.Position;
 
-        private float GetRandomScale(float min)
-        {
-            return _spawnPointRandom.ValueRW.Value.NextFloat(min, 1f);
-        }
-
-        private quaternion GetRandomRotation()
-        {
-            return quaternion.RotateY(_spawnPointRandom.ValueRW.Value.NextFloat(-0.25f, 0.25f));
-        }
-
-        private float3 GetRandomPosition()
-        {
-            float3 randomPosition;
-            do
-            {
-                randomPosition = _spawnPointRandom.ValueRW.Value.NextFloat3(MinCorner, MaxCorner);
-            } while (math.distancesq(_transform.ValueRO.Position, randomPosition) <= PLAYER_SAFETY_RADIUS - 1);
-
-            return randomPosition;
-        }
 
         public float3 GetEnemyOffset()
         {
@@ -100,6 +92,7 @@ namespace Aspects
         {
             return _spawnPointLocations.ValueRO.Value.IsCreated && EnemySpawnPointCount > 0;
         }
+
 
         private float3 GetEnemySpawnPoint(int i)
         {

@@ -13,6 +13,8 @@ namespace AuthoringAndMono
         public int NumberOfSpawners;
         public GameObject SpawnerPrefab;
         public GameObject EnemyPrefab;
+        public GameObject PlayerPrefab;
+
         public float EnemySpawnRate;
         public uint RandomSeed;
         public float3 EnemyOffset;
@@ -30,6 +32,7 @@ namespace AuthoringAndMono
                 NumberOfSpawners = authoring.NumberOfSpawners,
                 SpawnerPrefab = GetEntity(authoring.SpawnerPrefab, TransformUsageFlags.Dynamic),
                 EnemyPrefab = GetEntity(authoring.EnemyPrefab, TransformUsageFlags.Dynamic),
+                PlayerPrefab = GetEntity(authoring.PlayerPrefab, TransformUsageFlags.Dynamic),
                 EnemySpawnRate = authoring.EnemySpawnRate,
                 offset = authoring.EnemyOffset
             });

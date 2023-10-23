@@ -6,7 +6,7 @@ using Unity.Entities;
 namespace Systems.Move
 {
     [BurstCompile]
-    public partial struct MoveJob : IJobEntity
+    public partial struct EnemyMoveJob : IJobEntity
     {
         public float DeltaTime;
 

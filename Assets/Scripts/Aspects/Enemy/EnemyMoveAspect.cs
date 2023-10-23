@@ -16,8 +16,6 @@ namespace Aspects
         private readonly RefRO<EnemyHeading> _heading;
 
         private float MoveSpeed => _enemyMoveProperties.ValueRO.Speed;
-        private float MoveAmplitude => _enemyMoveProperties.ValueRO.Amplitude;
-        private float MoveFrequency => _enemyMoveProperties.ValueRO.Frequency;
         private float Heading => _heading.ValueRO.Value;
 
         private float Timer

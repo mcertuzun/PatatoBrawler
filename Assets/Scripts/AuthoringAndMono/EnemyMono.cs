@@ -12,7 +12,7 @@ namespace AuthoringAndMono
         public float moveFrequency;
     }
 
-    public class ZombieBaker : Baker<EnemyMono>
+    public class EnemyBaker : Baker<EnemyMono>
     {
         public override void Bake(EnemyMono authoring)
         {
